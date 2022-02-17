@@ -7,7 +7,10 @@ Nome: Guilherme Dytz dos Santos
 Cartão: 244475
 
 ## Atividades desenvolvidas
-Todas as atividades propostas foram desenvolvidas em um mesmo app. A listagem de onde elas podem ser encontradas é descrita abaixo.
+Todas as atividades propostas foram desenvolvidas em um mesmo app. 
+
+A listagem de onde elas podem ser encontradas é descrita abaixo.
+
 * Atividade Parte 1.1 - Aplicação de soma - [SumApp](https://github.com/guidytz/IHC-App/tree/master/app/src/main/java/com/example/ihcapp/SumApp)
 * Atividade Parte 1.2 - Atividades que compartilham um texto de input - [SwitchActivityApp](https://github.com/guidytz/IHC-App/tree/master/app/src/main/java/com/example/ihcapp/SwitchActivityApp)
 * Atividade Parte 1.3 - Aplicação usando o acelerômetro do celular - [AccelerometerApp](https://github.com/guidytz/IHC-App/tree/master/app/src/main/java/com/example/ihcapp/AccelerometerApp)
