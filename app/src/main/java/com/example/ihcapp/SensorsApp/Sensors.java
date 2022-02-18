@@ -1,5 +1,6 @@
 package com.example.ihcapp.SensorsApp;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.hardware.Sensor;
@@ -7,11 +8,13 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.example.ihcapp.R;
 
 import java.text.MessageFormat;
+import java.util.Objects;
 
 public class Sensors extends AppCompatActivity implements SensorEventListener {
 
@@ -28,6 +31,8 @@ public class Sensors extends AppCompatActivity implements SensorEventListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sensors);
+        Objects.requireNonNull(getSupportActionBar()).setTitle("IHC App - Sensores");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         mSensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
         mLight = mSensorManager.getDefaultSensor(Sensor.TYPE_LIGHT);
@@ -42,13 +47,13 @@ public class Sensors extends AppCompatActivity implements SensorEventListener {
     @Override
     protected void onResume() {
         super.onResume();
-        mSensorManager.registerListener((SensorEventListener) this, mLight, SensorManager.SENSOR_DELAY_NORMAL);
-        mSensorManager.registerListener((SensorEventListener) this, mGyroscope, SensorManager.SENSOR_DELAY_NORMAL);
+        mSensorManager.registerListener(this, mLight, SensorManager.SENSOR_DELAY_NORMAL);
+        mSensorManager.registerListener(this, mGyroscope, SensorManager.SENSOR_DELAY_NORMAL);
     }
     @Override
     protected void onPause() {
         super.onPause();
-        mSensorManager.unregisterListener((SensorEventListener) this);
+        mSensorManager.unregisterListener(this);
     }
 
     @Override
@@ -79,5 +84,14 @@ public class Sensors extends AppCompatActivity implements SensorEventListener {
         gyroX.setText(MessageFormat.format("x: {0, number, #.##}", x));
         gyroY.setText(MessageFormat.format("y: {0, number, #.##}", y));
         gyroZ.setText(MessageFormat.format("z: {0, number, #.##}", z));
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            this.finish();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

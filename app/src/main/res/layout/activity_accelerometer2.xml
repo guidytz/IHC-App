@@ -13,7 +13,7 @@
         android:layout_marginStart="35dp"
         android:layout_marginTop="300dp"
         android:layout_marginEnd="35dp"
-        android:text="Reached expected value in one of the accelerometer values."
+        android:text="Atingiu o valor desejado em algum dos valores do acelerômetro!"
         android:textAlignment="center"
         android:textSize="24sp"
         android:textStyle="bold"

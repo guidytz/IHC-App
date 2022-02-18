@@ -1,5 +1,6 @@
 package com.example.ihcapp.LocationApp;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
@@ -9,12 +10,14 @@ import android.Manifest;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
-import android.view.View;
+import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.Toast;
 
 
 import com.example.ihcapp.R;
+
+import java.util.Objects;
 
 public class LocationApp extends AppCompatActivity {
 
@@ -26,6 +29,8 @@ public class LocationApp extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_location);
+        Objects.requireNonNull(getSupportActionBar()).setTitle("IHC App - Localização");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         gpsButton = findViewById(R.id.gps_button);
 
@@ -35,15 +40,12 @@ public class LocationApp extends AppCompatActivity {
         }
         gps = new GPSTracker(getApplicationContext());
 
-        gpsButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Location loc = gps.getLocation();
-                if (loc != null) {
-                    double lat = loc.getLatitude();
-                    double lon = loc.getLongitude();
-                    Toast.makeText(getApplicationContext(), "Lat: " + lat + "\nLong: " + lon, Toast.LENGTH_LONG).show();
-                }
+        gpsButton.setOnClickListener(view -> {
+            Location loc = gps.getLocation();
+            if (loc != null) {
+                double lat = loc.getLatitude();
+                double lon = loc.getLongitude();
+                Toast.makeText(getApplicationContext(), "Lat: " + lat + "\nLong: " + lon, Toast.LENGTH_LONG).show();
             }
         });
     }
@@ -55,5 +57,12 @@ public class LocationApp extends AppCompatActivity {
         gps.turnOffGPS();
     }
 
-
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            this.finish();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 }

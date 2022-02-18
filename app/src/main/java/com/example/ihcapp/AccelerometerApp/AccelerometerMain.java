@@ -1,5 +1,6 @@
 package com.example.ihcapp.AccelerometerApp;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -8,11 +9,13 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.example.ihcapp.R;
 
 import java.text.MessageFormat;
+import java.util.Objects;
 
 public class AccelerometerMain extends AppCompatActivity implements SensorEventListener {
 
@@ -35,17 +38,20 @@ public class AccelerometerMain extends AppCompatActivity implements SensorEventL
         coordX = findViewById(R.id.value_x);
         coordY = findViewById(R.id.value_y);
         coordZ = findViewById(R.id.value_z);
+
+        Objects.requireNonNull(getSupportActionBar()).setTitle("IHC App - Acelerômetro");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        mSensorManager.registerListener((SensorEventListener) this, mAccelerometer, SensorManager.SENSOR_DELAY_NORMAL);
+        mSensorManager.registerListener(this, mAccelerometer, SensorManager.SENSOR_DELAY_NORMAL);
     }
     @Override
     protected void onPause() {
         super.onPause();
-        mSensorManager.unregisterListener((SensorEventListener) this);
+        mSensorManager.unregisterListener(this);
     }
 
     @Override
@@ -66,6 +72,15 @@ public class AccelerometerMain extends AppCompatActivity implements SensorEventL
     @Override
     public void onAccuracyChanged(Sensor sensor, int accuracy)
     {
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            this.finish();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     public void showNewActivity() {

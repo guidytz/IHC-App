@@ -5,6 +5,8 @@
     android:id="@+id/main_app"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:addStatesFromChildren="false"
+    tools:actionBarNavMode="standard"
     tools:context=".MainActivity">
 
     <Button
